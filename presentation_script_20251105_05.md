@@ -80,8 +80,8 @@ AIで何か作ってますか？
 【画像】初代151種（1996） → 【画像】全1025種（2025）
 
 ※画像で視覚的に進化を表現
-- images/pokemon_gen1_151.jpg
-- images/pokemon_all_1025.jpg
+- pokemon_gen1_151.jpg
+- pokemon_all_1025.jpg
 
 **29年間進化し続ける**
 
