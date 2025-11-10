@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完成待ってたら死ぬ 〜今出せ、v1.0で出せ〜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 80px;
+            background: white;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .slide h1 {
+            font-size: 4rem;
+            color: #EC65A5;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .slide h2 {
+            font-size: 2.8rem;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            color: #EC65A5;
+            margin: 20px 0 15px 0;
+            font-weight: 600;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.6rem;
+            color: #555;
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+
+        .slide ul {
+            list-style: none;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .subtitle {
+            font-size: 2.4rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .author {
+            font-size: 2rem;
+            color: #888;
+            margin-top: 30px;
+        }
+
+        .event {
+            font-size: 1.6rem;
+            color: #999;
+            margin-top: 15px;
+        }
+
+        .arrow {
+            font-size: 2.5rem;
+            color: #EC65A5;
+            margin: 5px 0;
+            text-align: center;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin-right: 15px;
+        }
+
+        .content-box {
+            background: linear-gradient(135deg, #ffffff 0%, #fef5fa 100%);
+            border-left: 6px solid #EC65A5;
+            padding: 25px 35px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 85%;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(236, 101, 165, 0.1);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .timeline p {
+            text-align: center;
+        }
+
+        .phase {
+            background: linear-gradient(135deg, #EC65A5 0%, #d5508d 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            box-shadow: 0 3px 10px rgba(236, 101, 165, 0.3);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .controls button {
+            background: linear-gradient(135deg, #EC65A5 0%, #d5508d 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.3rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(236, 101, 165, 0.3);
+        }
+
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(236, 101, 165, 0.4);
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            font-size: 1.4rem;
+            color: #999;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            color: #EC65A5;
+            font-weight: bold;
+        }
+
+        .two-column {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            max-width: 90%;
+            align-items: flex-start;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .feature-list {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-list li {
+            margin: 15px 0;
+            font-size: 1.5rem;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background: #EC65A5;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            margin: 5px;
+        }
+
+        .photo-container {
+            max-width: 500px;
+            max-height: 400px;
+            margin: 20px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .three-photos {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .three-photos .photo-item {
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .three-photos img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .three-photos p {
+            display: none;  /* キャプション非表示 */
+        }
+
+        .vs-box {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            width: 100%;
+            max-width: 85%;
+        }
+
+        .vs-item {
+            flex: 1;
+            padding: 25px;
+            border-radius: 8px;
+            min-height: 200px;
+        }
+
+        .vs-item.task {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            border: 3px solid #999;
+        }
+
+        .vs-item.product {
+            background: linear-gradient(135deg, #fef5fa 0%, #fce4f0 100%);
+            border: 3px solid #EC65A5;
+        }
+
+        .vs-separator {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #EC65A5;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- スライド1: タイトル -->
+        <div class="slide active">
+            <h1>完成待ってたら死ぬ</h1>
+            <p class="subtitle">〜今出せ、v1.0で出せ〜</p>
+            <p class="author">Hiroki Takamura</p>
+            <p class="event">AI勉強会 2025.11</p>
+        </div>
+
+        <!-- スライド2: 問いかけ -->
+        <div class="slide">
+            <h2>みなさんに質問</h2>
+            <p style="font-size: 2rem; margin: 15px 0;">AIで何か作ってますか？</p>
+            <div class="arrow">↓</div>
+            <p style="font-size: 2rem; margin: 15px 0;">いつ完成しますか？</p>
+            <div class="arrow">↓</div>
+            <h2 style="font-size: 2.8rem; color: #EC65A5; margin: 15px 0;">答え：完成しません</h2>
+            <div class="arrow">↓</div>
+            <p style="font-size: 2rem; margin: 15px 0;">じゃあいつ出すんですか？</p>
+            <div class="arrow">↓</div>
+            <h2 style="font-size: 3.2rem; color: #EC65A5;">今です</h2>
+        </div>
+
+        <!-- スライド3: 自己紹介 -->
+        <div class="slide">
+            <h2>誰が話してるの？</h2>
+            <h3 style="text-align: center; margin-bottom: 20px; font-size: 2rem;">Hiroki Takamura</h3>
+            <div class="content-box" style="width: 100%; max-width: 90%; text-align: left; padding: 25px 35px;">
+                <p style="font-size: 1.4rem; line-height: 1.8;">
+                    ダンス 20年（ストリート→コンテンポラリー、自主公演、東京ドーム出演）/ ヨガ講師 10年以上（シヴァナンダヨガDVD監修）/ IT 30年 / 小説（一次選考通過）/ ロープアクセス / 飲食業（ゴールデン街バーテンダー）/ <strong style="color: #EC65A5;">現在：フリーランスエンジニア＋個人開発</strong>
+                </p>
+            </div>
+            <div class="three-photos">
+                <div class="photo-item">
+                    <img src="images/yoga_class.jpg" alt="ヨガクラス">
+                    <p style="color: #EC65A5;">ヨガクラス</p>
+                </div>
+                <div class="photo-item">
+                    <img src="images/dance_performance.jpg" alt="ダンス公演">
+                    <p style="color: #EC65A5;">ダンス公演</p>
+                </div>
+                <div class="photo-item">
+                    <img src="images/bartender.jpg" alt="バーテンダー">
+                    <p style="color: #EC65A5;">バーテンダー</p>
+                </div>
+            </div>
+            <p style="font-size: 1.6rem; margin-top: 20px; text-align: center; color: #666;">
+                様々なプロダクトを作ってきた
+            </p>
+        </div>
+
+        <!-- スライド4: タスク vs プロダクト -->
+        <div class="slide">
+            <h2>タスク vs プロダクト</h2>
+            <div class="vs-box">
+                <div class="vs-item task">
+                    <h3 style="color: #333; text-align: center;">タスク</h3>
+                    <p style="font-size: 1.5rem; line-height: 2; margin-top: 20px; text-align: center;">
+                        • 問題を解決する<br>
+                        • ゴールは決まっている<br>
+                        • 終わりがある
+                    </p>
+                </div>
+                <div class="vs-separator">≠</div>
+                <div class="vs-item product">
+                    <h3 style="text-align: center;">プロダクト</h3>
+                    <p style="font-size: 1.5rem; line-height: 2; margin-top: 20px; text-align: center;">
+                        • 新しいものを作る<br>
+                        • <strong>ゴールを自分で決める</strong><br>
+                        • 終わりがない
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド5: プロダクトの定義 -->
+        <div class="slide">
+            <h2>プロダクトとは何か？</h2>
+            <div class="content-box" style="max-width: 75%;">
+                <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; margin-bottom: 30px;">
+                    プロダクト = パッケージング
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.8rem; line-height: 2.2; margin: 20px 0; text-align: center;">
+                    <strong>パッケージング = 人が使える状態</strong><br>
+                    <span style="font-size: 1.5rem; color: #666; display: block; margin-top: 10px;">
+                        • 配布できる<br>
+                        • セキュア<br>
+                        • 使ってもらえる
+                    </span>
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; color: #EC65A5; font-weight: bold; text-align: center; margin-top: 20px;">
+                    それがv1.0
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド6: 例：ダンス公演もプロダクト -->
+        <div class="slide">
+            <h2>例：ダンス公演もプロダクト</h2>
+            <div class="vs-box">
+                <div class="vs-item task">
+                    <h3 style="color: #333; text-align: center;">稽古</h3>
+                    <p style="font-size: 1.5rem; text-align: center; margin-top: 30px;">
+                        = タスク<br>
+                        <span style="font-size: 1.3rem; color: #666; margin-top: 10px; display: block;">
+                            技を磨く<br>
+                            自分のため
+                        </span>
+                    </p>
+                </div>
+                <div class="vs-separator">→</div>
+                <div class="vs-item product">
+                    <h3 style="text-align: center;">公演</h3>
+                    <p style="font-size: 1.5rem; text-align: center; margin-top: 30px;">
+                        = プロダクト<br>
+                        <span style="font-size: 1.3rem; color: #666; margin-top: 10px; display: block;">
+                            日時を決めて<br>
+                            観客に届ける
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <p style="font-size: 1.8rem; color: #EC65A5; font-weight: bold; text-align: center; margin-top: 30px;">
+                これがパッケージング
+            </p>
+        </div>
+
+        <!-- スライド7: ポケモン -->
+        <div class="slide">
+            <h2>完成しない、進化し続けるもの①</h2>
+            <p style="text-align: center; margin-bottom: 20px;"><span class="emoji">🎮</span><strong style="font-size: 2rem;">ポケモン</strong></p>
+            <div style="display: flex; gap: 30px; margin: 30px 0; align-items: center; justify-content: center; max-width: 85%;">
+                <div style="flex: 1; text-align: center; max-width: 300px;">
+                    <img src="images/pokemon_gen1_151.jpg" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" alt="初代151種">
+                    <p style="font-size: 1.5rem; margin-top: 15px; font-weight: bold;">151種類（1996）</p>
+                </div>
+                <div style="font-size: 3.5rem; color: #EC65A5; font-weight: bold;">→</div>
+                <div style="flex: 1; text-align: center; max-width: 300px;">
+                    <img src="images/pokemon_all_1025.jpg" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" alt="全1025種">
+                    <p style="font-size: 1.5rem; margin-top: 15px; font-weight: bold;">1025種類（2025）</p>
+                </div>
+            </div>
+            <p class="highlight" style="font-size: 2rem; text-align: center; margin-top: 25px;">29年間進化し続ける</p>
+        </div>
+
+        <!-- スライド8: GPT -->
+        <div class="slide">
+            <h2>完成しない、進化し続けるもの②</h2>
+            <div class="content-box" style="max-width: 60%;">
+                <p style="text-align: center; margin-bottom: 20px;"><span class="emoji">🤖</span><strong style="font-size: 2rem;">GPT（AI）</strong></p>
+                <div class="timeline">
+                    <p style="font-size: 1.6rem;">GPT-3 (2020)</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 1.6rem;">GPT-4 → GPT-4o</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 1.6rem;">GPT-5 (2025)</p>
+                    <div class="arrow">↓</div>
+                    <p class="highlight" style="font-size: 1.7rem;">5年間進化し続ける</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド9: 共通点 -->
+        <div class="slide">
+            <h2>共通点</h2>
+            <div style="max-width: 80%;">
+                <p style="font-size: 2.5rem; line-height: 2; text-align: center; margin: 25px 0;">
+                    v1.0で完成ではない
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; margin: 25px 0;">
+                    でも毎回リリースする
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; text-align: center; margin: 25px 0; color: #666;">
+                    リリース後も進化し続ける
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド10: 今日の話 -->
+        <div class="slide">
+            <h2>今日の話</h2>
+            <div class="content-box" style="max-width: 75%;">
+                <p style="font-size: 2rem; line-height: 2.2; text-align: center;">
+                    <strong style="color: #EC65A5;">v1.0をどう決めるか</strong><br>
+                    <span style="font-size: 1.6rem; color: #666; margin-top: 20px; display: block;">
+                        KoeMoji-Go開発ストーリーを通して
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド11: ダンス公演（成功例） -->
+        <div class="slide">
+            <h2>ダンス公演：成功例</h2>
+            <div class="photo-container">
+                <img src="images/dance_performance.jpg" alt="ダンス公演">
+            </div>
+            <div style="margin-top: 40px;">
+                <p style="font-size: 2.2rem; color: #333; font-weight: bold; text-align: center; line-height: 2;">
+                    20年間、「完成」はなかった
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.2rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2;">
+                    でも「発表し続けた」
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.8rem; text-align: center; line-height: 2; color: #666;">
+                    毎回v1.0を決めて出した
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド12: 小説（失敗例） -->
+        <div class="slide">
+            <h2>小説：失敗例</h2>
+            <div class="content-box" style="max-width: 75%;">
+                <p style="font-size: 2rem; line-height: 2.5; text-align: center; margin: 20px 0;">
+                    一次選考通過
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; line-height: 2.5; text-align: center; margin: 20px 0; color: #d5508d; font-weight: bold;">
+                    でも「v1.0」を決められなかった
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.7rem; line-height: 2; text-align: center; margin: 20px 0; color: #666;">
+                    「もっと良くなる」と思い続けた
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; color: #d5508d; font-weight: bold; text-align: center; margin: 20px 0;">
+                    出せなかった
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド13: 失敗から学んだこと -->
+        <div class="slide">
+            <h2>失敗から学んだこと</h2>
+            <div style="max-width: 80%;">
+                <p style="font-size: 2.2rem; text-align: center; line-height: 2; margin: 25px 0;">
+                    完璧を待っていたら何も出せない
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; text-align: center; line-height: 2; margin: 25px 0; color: #666;">
+                    問題は「完成を待つ」ことじゃない
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2; margin: 25px 0;">
+                    「v1.0をどこにするか<br>決められない」こと
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド14: 気づき -->
+        <div class="slide">
+            <h2 style="font-size: 3.5rem; color: #EC65A5;">気づき</h2>
+            <div style="max-width: 80%;">
+                <p style="font-size: 2.5rem; text-align: center; line-height: 2; margin: 30px 0;">
+                    v1.0をどこにするか
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.2rem; color: #333; text-align: center; line-height: 2; margin: 30px 0;">
+                    人に使ってもらえる状態<br>
+                    = プロダクト
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2;">
+                    完璧を待つな<br>
+                    v1.0を決めろ
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド15: なぜ作ったか -->
+        <div class="slide">
+            <h2>KoeMoji-Go：なぜ作ったか</h2>
+            <div class="content-box" style="max-width: 80%;">
+                <p style="font-size: 2rem; color: #EC65A5; font-weight: bold; text-align: center; margin-bottom: 20px;">
+                    文字起こし = 人がやるべき仕事ではない
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.7rem; font-weight: bold; text-align: center; margin: 20px 0;">
+                    Whisper登場（ローカルで動く高精度AI）
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.6rem; line-height: 2; margin: 20px 0; text-align: center; color: #666;">
+                    でも既存ツールは使いづらい<br>
+                    <span style="font-size: 1.4rem;">（クラウド型は機密性・課金、直接利用は技術必要）</span>
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; color: #EC65A5; font-weight: bold; text-align: center;">
+                    ローカルで、簡単に、誰でも使える<br>
+                    ツールを作ろう
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド16: KoeMoji-Goとは -->
+        <div class="slide">
+            <h2>KoeMoji-Go とは？</h2>
+            <p style="text-align: center; font-size: 1.6rem; margin-bottom: 30px; color: #666;">音声・動画ファイル自動文字起こしツール</p>
+            <div class="two-column">
+                <div class="column">
+                    <h3 style="text-align: center;">主な機能</h3>
+                    <ul class="feature-list">
+                        <li>🎤 音声・動画の自動文字起こし</li>
+                        <li>🎙️ 録音機能（マイク / デュアル録音）</li>
+                        <li>🤖 AI要約（OpenAI API）</li>
+                        <li>🖥️ GUI & TUI 両対応</li>
+                        <li>🔒 完全ローカル処理</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 style="text-align: center;">実用例</h3>
+                    <ul class="feature-list">
+                        <li>📝 会議の議事録作成</li>
+                        <li>🏥 医療機関での記録</li>
+                        <li>⚖️ 法律事務所での相談記録</li>
+                        <li>🏗️ 建設業での打ち合わせ</li>
+                        <li>🎓 講義の文字起こし</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド17: Phase 1 - Python版の挑戦 -->
+        <div class="slide">
+            <h2>Phase 1：Python版の挑戦</h2>
+            <div class="content-box" style="max-width: 75%;">
+                <div class="phase">KoeMojiAuto-cli（Python）</div>
+                <div class="timeline">
+                    <p style="font-size: 1.8rem;">CLI版：v1.0達成 ✓</p>
+                    <p style="font-size: 1.5rem; color: #666; margin-top: 10px;">コンパイル成功、配布可能に</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 1.8rem;">GUI版を追加</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 1.8rem; color: #d5508d; font-weight: bold;">GUI版：コンパイル失敗 ✗</p>
+                    <p style="font-size: 1.5rem; color: #666; margin-top: 10px;">仮想環境内にパッケージングできない</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 2rem; color: #EC65A5; font-weight: bold;">GUI版をどうやって配布するか？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド18: Phase 2 - Go言語への決断 -->
+        <div class="slide">
+            <h2>Phase 2：Go言語への決断</h2>
+            <div class="content-box" style="max-width: 80%;">
+                <div class="phase">大きな決断</div>
+                <p style="font-size: 2.2rem; margin: 30px 0; text-align: center; font-weight: bold;">
+                    💡 書いたことないGo言語に移行
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.8rem; margin: 20px 0; line-height: 2; text-align: center;">
+                    <strong style="color: #EC65A5;">理由</strong><br>
+                    ✓ シングルバイナリ配布（インストール不要）<br>
+                    ✓ クロスプラットフォーム対応<br>
+                    ✓ 高速・安定動作
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; color: #EC65A5; font-weight: bold; text-align: center;">
+                    これでGUI版のv1.0が決まる
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド19: Go版v1.0達成 -->
+        <div class="slide">
+            <h2>Go版v1.0達成</h2>
+            <div class="content-box" style="max-width: 80%;">
+                <p style="font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 25px;">
+                    Fyne v2.6.1でクロスプラットフォームGUI実現
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.8rem; line-height: 2.2; margin: 20px 0; text-align: center;">
+                    シングルバイナリで配布可能に<br>
+                    <span style="font-size: 1.5rem; color: #666;">
+                        Windows/macOS両対応、インストール不要
+                    </span>
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.2rem; color: #EC65A5; font-weight: bold; text-align: center; margin-top: 20px;">
+                    本当のv1.0 = パッケージング完成
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド20: v1.6.0 - 録音機能追加 -->
+        <div class="slide">
+            <h2>v1.6.0：録音機能追加</h2>
+            <div class="content-box" style="max-width: 80%;">
+                <p style="font-size: 2rem; color: #EC65A5; font-weight: bold; text-align: center; margin-bottom: 25px;">
+                    マイク録音ができるように
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.8rem; line-height: 2.2; margin: 20px 0; text-align: center;">
+                    用途が大幅に拡大<br>
+                    <span style="font-size: 1.5rem; color: #666;">
+                        会議・インタビューなど<br>
+                        リアルタイム記録が可能に
+                    </span>
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.7rem; line-height: 2; margin: 20px 0; text-align: center;">
+                    <span class="tech-badge">PortAudio</span> による<br>
+                    クロスプラットフォーム録音実装
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド21: v1.7.0/v1.8.0 - デュアル録音への挑戦 -->
+        <div class="slide">
+            <h2>v1.7.0/v1.8.0：デュアル録音への挑戦</h2>
+            <div class="content-box" style="max-width: 85%;">
+                <p style="font-size: 1.9rem; margin: 20px 0; font-weight: bold; text-align: center; color: #EC65A5;">
+                    システム音 + マイク 同時録音
+                </p>
+                <div class="two-column" style="margin-top: 20px;">
+                    <div class="column">
+                        <p style="font-size: 1.5rem; line-height: 2; text-align: center;">
+                            <strong>Windows (v1.7.0)</strong><br>
+                            <span class="tech-badge">WASAPI</span> Loopback<br>
+                            + PortAudio
+                        </p>
+                    </div>
+                    <div class="column">
+                        <p style="font-size: 1.5rem; line-height: 2; text-align: center;">
+                            <strong>macOS (v1.8.0)</strong><br>
+                            <span class="tech-badge">Swift</span> ScreenCaptureKit<br>
+                            + PortAudio
+                        </p>
+                    </div>
+                </div>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.6rem; margin: 20px 0; text-align: center;">
+                    <strong style="color: #EC65A5;">BlackHole / VoiceMeeter 不要化</strong><br>
+                    <span style="font-size: 1.4rem; color: #666;">外部依存を排除、Pure Go WAVミキサー実装</span>
+                </p>
+                <p style="font-size: 1.4rem; margin-top: 15px; text-align: center; color: #999;">
+                    ※自分の環境では動作確認済み、他環境はテスト中
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド22: v1.0→v1.8.5の進化 -->
+        <div class="slide">
+            <h2>v1.0 → v1.8.5 の進化</h2>
+            <div class="content-box" style="max-width: 80%;">
+                <p style="font-size: 2rem; margin: 20px 0; text-align: center; font-weight: bold; color: #EC65A5;">
+                    326コミット
+                </p>
+                <div class="timeline">
+                    <p style="font-size: 1.5rem; margin: 15px 0;">v1.0 基本的な文字起こし機能</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 1.5rem; margin: 15px 0;">v1.6.0 録音機能追加</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 1.5rem; margin: 15px 0;">v1.7.0 Windows デュアル録音</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 1.5rem; margin: 15px 0;">v1.8.0 macOS デュアル録音、TUI正式版</p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 1.5rem; margin: 15px 0;">v1.8.5 現在</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド23: でもまだ序章 -->
+        <div class="slide">
+            <h2>でもまだ序章</h2>
+            <div style="max-width: 80%;">
+                <p style="font-size: 2rem; text-align: center; line-height: 2; margin: 25px 0;">
+                    v1.0で完成ではない
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; text-align: center; line-height: 2; margin: 25px 0;">
+                    v1.8.5まで進化
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.2rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2; margin: 25px 0;">
+                    次：Web版検討中
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; text-align: center; line-height: 2; color: #666;">
+                    終わりはない、でも毎回リリース
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド24: なぜ作り続けるのか -->
+        <div class="slide">
+            <h2>なぜ作り続けるのか？</h2>
+            <div style="max-width: 80%;">
+                <p style="font-size: 2.2rem; text-align: center; line-height: 2.2; margin: 30px 0;">
+                    作り続けること自体が目的
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2.2; margin: 30px 0;">
+                    創作こそが人間の本質
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.9rem; text-align: center; line-height: 2; margin: 30px 0; color: #666;">
+                    AI時代でも変わらない<br>
+                    「自分の頭で考えて何を作るか」
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド25: 創作が人を救う -->
+        <div class="slide">
+            <h2>創作が人を救う</h2>
+            <div style="max-width: 80%;">
+                <p style="font-size: 2.2rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2.2; margin: 30px 0;">
+                    創作し続けることが<br>
+                    人を救う唯一の方法
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.9rem; text-align: center; line-height: 2.2; margin: 30px 0;">
+                    時間が余っても<br>
+                    時間が早くなっても<br>
+                    <span style="font-size: 1.7rem; color: #666; margin-top: 15px; display: block;">
+                        最後に人間がやれることは<br>
+                        変わらない
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド26: プロダクトアウトであれ -->
+        <div class="slide">
+            <h2>プロダクトアウトであれ</h2>
+            <div style="max-width: 80%;">
+                <p style="font-size: 2rem; text-align: center; line-height: 2.2; margin: 30px 0;">
+                    必要な人がいるかもしれない<br>
+                    いらないかもしれない
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.3rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2.2; margin: 30px 0;">
+                    それでも作る<br>
+                    作りたいから作る
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; text-align: center; line-height: 2; margin: 30px 0;">
+                    それがプロダクトアウト
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド27: これはKoeMoji-Goだけの話じゃない -->
+        <div class="slide">
+            <h2>これはKoeMoji-Goだけの話じゃない</h2>
+            <div style="max-width: 80%;">
+                <p style="font-size: 2.2rem; text-align: center; line-height: 2.5; margin: 30px 0;">
+                    ダンス公演も<br>
+                    あなたが作るものも
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2rem; text-align: center; line-height: 2; margin: 30px 0; color: #666;">
+                    全て同じ
+                </p>
+                <div class="arrow">↓</div>
+                <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2;">
+                    v1.0を決めて、出せ
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド28: パラドックス -->
+        <div class="slide">
+            <h2 style="font-size: 3.5rem; color: #EC65A5;">パラドックス</h2>
+            <p style="font-size: 2.5rem; text-align: center; line-height: 2.5; margin-top: 80px;">
+                この話も、鵜呑みにするな
+            </p>
+        </div>
+
+        <!-- スライド29: まとめ - 3つの真実 -->
+        <div class="slide">
+            <h2>3つの真実</h2>
+            <div class="content-box" style="max-width: 85%;">
+                <div style="margin: 30px 0;">
+                    <p style="font-size: 2rem; line-height: 2.5; margin: 25px 0; text-align: center;">
+                        <strong style="color: #EC65A5; font-size: 2.2rem;">1. 創作し続けること</strong><br>
+                        <span style="font-size: 1.7rem; color: #666;">それが人を救う</span>
+                    </p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 2rem; line-height: 2.5; margin: 25px 0; text-align: center;">
+                        <strong style="color: #EC65A5; font-size: 2.2rem;">2. プロダクトアウトであれ</strong><br>
+                        <span style="font-size: 1.7rem; color: #666;">作りたいから作る</span>
+                    </p>
+                    <div class="arrow">↓</div>
+                    <p style="font-size: 2rem; line-height: 2.5; margin: 25px 0; text-align: center;">
+                        <strong style="color: #EC65A5; font-size: 2.2rem;">3. v1.0で出せ</strong><br>
+                        <span style="font-size: 1.7rem; color: #666;">完成を待つな</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド30: リンク -->
+        <div class="slide">
+            <h1 style="font-size: 3.5rem; margin-bottom: 50px;">完成待ってたら死ぬ</h1>
+            <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; margin-bottom: 60px;">今出せ、v1.0で出せ</p>
+            <div style="text-align: center;">
+                <p style="font-size: 2rem; margin: 30px 0; font-weight: bold;">KoeMoji-Go</p>
+                <p style="font-size: 1.8rem; margin: 15px 0; color: #666;">github.com/infoHiroki/KoeMoji-Go</p>
+                <p style="font-size: 2rem; margin: 30px 0; margin-top: 50px; font-weight: bold;">Chrome拡張機能</p>
+                <p style="font-size: 1.8rem; margin: 15px 0; color: #666;">YouTube文字コピー</p>
+            </div>
+            <p style="font-size: 2.2rem; margin-top: 60px; color: #EC65A5; font-weight: bold;">ご清聴ありがとうございました</p>
+        </div>
+    </div>
+
+    <div class="slide-number">
+        <span id="current-slide">1</span> / <span id="total-slides">30</span>
+    </div>
+
+    <div class="controls">
+        <button id="prev-btn">← 前へ</button>
+        <button id="next-btn">次へ →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+
+        // キーボード操作
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                showSlide(currentSlide - 1);
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                showSlide(currentSlide + 1);
+            }
+        });
+
+        // スワイプ操作（タッチデバイス用）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                showSlide(currentSlide + 1);
+            }
+            if (touchEndX > touchStartX + 50) {
+                showSlide(currentSlide - 1);
+            }
+        }
+    </script>
+</body>
+</html>
