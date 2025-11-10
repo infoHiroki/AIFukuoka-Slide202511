@@ -102,8 +102,7 @@
         .arrow {
             font-size: 2.5rem;
             color: #EC65A5;
-            margin: 5px 0;
-            text-align: center;
+            margin: 10px 0;
         }
 
         .emoji {
@@ -114,10 +113,10 @@
         .content-box {
             background: linear-gradient(135deg, #ffffff 0%, #fef5fa 100%);
             border-left: 6px solid #EC65A5;
-            padding: 25px 35px;
-            margin: 15px 0;
+            padding: 30px 40px;
+            margin: 20px 0;
             width: 100%;
-            max-width: 85%;
+            max-width: 90%;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(236, 101, 165, 0.1);
         }
@@ -126,12 +125,6 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
-            align-items: center;
-            text-align: center;
-        }
-
-        .timeline p {
-            text-align: center;
         }
 
         .phase {
@@ -202,7 +195,7 @@
         }
 
         .feature-list {
-            text-align: center;
+            text-align: left;
             padding: 20px;
         }
 
@@ -258,7 +251,10 @@
         }
 
         .three-photos p {
-            display: none;  /* キャプション非表示 */
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 8px;
+            font-weight: bold;
         }
 
         .vs-box {
@@ -319,32 +315,17 @@
             <h2 style="font-size: 3.2rem; color: #EC65A5;">今です</h2>
         </div>
 
-        <!-- スライド3: 自己紹介 -->
+        <!-- スライド3: 今日の話 -->
         <div class="slide">
-            <h2>誰が話してるの？</h2>
-            <h3 style="text-align: center; margin-bottom: 20px; font-size: 2rem;">Hiroki Takamura</h3>
-            <div class="content-box" style="width: 100%; max-width: 90%; text-align: left; padding: 25px 35px;">
-                <p style="font-size: 1.4rem; line-height: 1.8;">
-                    ダンス 20年（ストリート→コンテンポラリー、自主公演、東京ドーム出演）/ ヨガ講師 10年以上（シヴァナンダヨガDVD監修）/ IT 30年 / 小説（一次選考通過）/ ロープアクセス / 飲食業（ゴールデン街バーテンダー）/ <strong style="color: #EC65A5;">現在：フリーランスエンジニア＋個人開発</strong>
+            <h2>今日の話</h2>
+            <div class="content-box" style="max-width: 75%;">
+                <p style="font-size: 2rem; line-height: 2.2; text-align: center;">
+                    <strong style="color: #EC65A5;">v1.0をどう決めるか</strong><br>
+                    <span style="font-size: 1.6rem; color: #666; margin-top: 20px; display: block;">
+                        KoeMoji-Go開発ストーリーを通して
+                    </span>
                 </p>
             </div>
-            <div class="three-photos">
-                <div class="photo-item">
-                    <img src="images/yoga_class.jpg" alt="ヨガクラス">
-                    <p style="color: #EC65A5;">ヨガクラス</p>
-                </div>
-                <div class="photo-item">
-                    <img src="images/dance_performance.jpg" alt="ダンス公演">
-                    <p style="color: #EC65A5;">ダンス公演</p>
-                </div>
-                <div class="photo-item">
-                    <img src="images/bartender.jpg" alt="バーテンダー">
-                    <p style="color: #EC65A5;">バーテンダー</p>
-                </div>
-            </div>
-            <p style="font-size: 1.6rem; margin-top: 20px; text-align: center; color: #666;">
-                様々なプロダクトを作ってきた
-            </p>
         </div>
 
         <!-- スライド4: タスク vs プロダクト -->
@@ -353,7 +334,7 @@
             <div class="vs-box">
                 <div class="vs-item task">
                     <h3 style="color: #333; text-align: center;">タスク</h3>
-                    <p style="font-size: 1.5rem; line-height: 2; margin-top: 20px; text-align: center;">
+                    <p style="font-size: 1.5rem; line-height: 2; margin-top: 20px;">
                         • 問題を解決する<br>
                         • ゴールは決まっている<br>
                         • 終わりがある
@@ -362,7 +343,7 @@
                 <div class="vs-separator">≠</div>
                 <div class="vs-item product">
                     <h3 style="text-align: center;">プロダクト</h3>
-                    <p style="font-size: 1.5rem; line-height: 2; margin-top: 20px; text-align: center;">
+                    <p style="font-size: 1.5rem; line-height: 2; margin-top: 20px;">
                         • 新しいものを作る<br>
                         • <strong>ゴールを自分で決める</strong><br>
                         • 終わりがない
@@ -379,9 +360,9 @@
                     プロダクト = パッケージング
                 </p>
                 <div class="arrow">↓</div>
-                <p style="font-size: 1.8rem; line-height: 2.2; margin: 20px 0; text-align: center;">
+                <p style="font-size: 1.8rem; line-height: 2.2; margin: 20px 0;">
                     <strong>パッケージング = 人が使える状態</strong><br>
-                    <span style="font-size: 1.5rem; color: #666; display: block; margin-top: 10px;">
+                    <span style="font-size: 1.5rem; color: #666; margin-left: 20px; display: block; margin-top: 10px;">
                         • 配布できる<br>
                         • セキュア<br>
                         • 使ってもらえる
@@ -478,17 +459,32 @@
             </div>
         </div>
 
-        <!-- スライド10: 今日の話 -->
+        <!-- スライド10: 自己紹介 -->
         <div class="slide">
-            <h2>今日の話</h2>
-            <div class="content-box" style="max-width: 75%;">
-                <p style="font-size: 2rem; line-height: 2.2; text-align: center;">
-                    <strong style="color: #EC65A5;">v1.0をどう決めるか</strong><br>
-                    <span style="font-size: 1.6rem; color: #666; margin-top: 20px; display: block;">
-                        KoeMoji-Go開発ストーリーを通して
-                    </span>
+            <h2>誰が話してるの？</h2>
+            <h3 style="text-align: center; margin-bottom: 20px; font-size: 2rem;">Hiroki Takamura</h3>
+            <div class="content-box" style="width: 100%; max-width: 90%; text-align: left; padding: 25px 35px;">
+                <p style="font-size: 1.4rem; line-height: 1.8;">
+                    ダンス 20年（ストリート→コンテンポラリー、自主公演、東京ドーム出演）/ ヨガ講師 10年以上（シヴァナンダヨガDVD監修）/ IT 30年 / 小説（一次選考通過）/ ロープアクセス / 飲食業（ゴールデン街バーテンダー）/ <strong style="color: #EC65A5;">現在：フリーランスエンジニア＋個人開発</strong>
                 </p>
             </div>
+            <div class="three-photos">
+                <div class="photo-item">
+                    <img src="images/yoga_class.jpg" alt="ヨガクラス">
+                    <p style="color: #EC65A5;">ヨガクラス</p>
+                </div>
+                <div class="photo-item">
+                    <img src="images/dance_performance.jpg" alt="ダンス公演">
+                    <p style="color: #EC65A5;">ダンス公演</p>
+                </div>
+                <div class="photo-item">
+                    <img src="images/bartender.jpg" alt="バーテンダー">
+                    <p style="color: #EC65A5;">バーテンダー</p>
+                </div>
+            </div>
+            <p style="font-size: 1.6rem; margin-top: 20px; text-align: center; color: #666;">
+                様々なプロダクトを作ってきた
+            </p>
         </div>
 
         <!-- スライド11: ダンス公演（成功例） -->
@@ -580,13 +576,13 @@
                     文字起こし = 人がやるべき仕事ではない
                 </p>
                 <div class="arrow">↓</div>
-                <p style="font-size: 1.8rem; line-height: 2; margin: 20px 0; text-align: center;">
+                <p style="font-size: 1.8rem; line-height: 2; margin: 20px 0;">
                     音を聞いて手で打つ<br>
                     → 実力がついても意味がない<br>
                     → 無駄な時間
                 </p>
                 <div class="arrow">↓</div>
-                <p style="font-size: 1.6rem; line-height: 2; margin: 20px 0; color: #666; text-align: center;">
+                <p style="font-size: 1.6rem; line-height: 2; margin: 20px 0; color: #666;">
                     インタビュー、学術機関、講演...<br>
                     様々な現場で無駄が発生
                 </p>
@@ -600,7 +596,7 @@
                 <p style="font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 25px;">
                     Whisper登場（オープンソースAI）
                 </p>
-                <p style="font-size: 1.7rem; line-height: 2.2; margin: 20px 0; text-align: center;">
+                <p style="font-size: 1.7rem; line-height: 2.2; margin: 20px 0;">
                     • 高精度で機械ができる<br>
                     • ローカルで動く<br>
                     • 普通のスペックで動く
@@ -623,7 +619,7 @@
                 <div class="column">
                     <div class="content-box" style="background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); border-left: 6px solid #999;">
                         <h3 style="text-align: center; color: #333;">クラウドツール</h3>
-                        <p style="font-size: 1.5rem; line-height: 2; margin-top: 15px; text-align: center;">
+                        <p style="font-size: 1.5rem; line-height: 2; margin-top: 15px;">
                             • 機密情報が心配<br>
                             • 課金が必要<br>
                             • 依存性がある
@@ -633,7 +629,7 @@
                 <div class="column">
                     <div class="content-box" style="background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); border-left: 6px solid #999;">
                         <h3 style="text-align: center; color: #333;">Whisper直接</h3>
-                        <p style="font-size: 1.5rem; line-height: 2; margin-top: 15px; text-align: center;">
+                        <p style="font-size: 1.5rem; line-height: 2; margin-top: 15px;">
                             • 環境構築が大変<br>
                             • 技術者じゃないと使えない<br>
                             • 配布できない
@@ -840,7 +836,7 @@
                 <p style="font-size: 2rem; margin: 20px 0; text-align: center; font-weight: bold; color: #EC65A5;">
                     326コミット
                 </p>
-                <div class="timeline">
+                <div class="timeline" style="text-align: left; padding: 0 20px;">
                     <p style="font-size: 1.5rem; margin: 15px 0;">v1.0 基本的な文字起こし機能</p>
                     <div class="arrow">↓</div>
                     <p style="font-size: 1.5rem; margin: 15px 0;">v1.6.0 録音機能追加</p>
