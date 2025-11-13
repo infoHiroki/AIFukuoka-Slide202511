@@ -293,10 +293,28 @@
     <div class="presentation">
         <!-- スライド1: タイトル -->
         <div class="slide active">
-            <h1>完成待ってたら死ぬ</h1>
-            <p class="subtitle">〜今出せ、v1.0で出せ〜</p>
-            <p class="author">Hiroki Takamura</p>
-            <p class="event">AI勉強会 2025.11</p>
+            <h1 style="font-size: 3.5rem; margin-bottom: 50px;">完成待ってたら死ぬ</h1>
+            <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; margin-bottom: 60px;">今出せ、v1.0で出せ</p>
+            <div style="display: flex; justify-content: center; gap: 100px; margin: 40px 0;">
+                <div style="text-align: center;">
+                    <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">KoeMoji-Go</p>
+                    <a href="https://hmtc.jp/it-solutions/products/koemoji/index.html" target="_blank" rel="noopener noreferrer">
+                        <img src="images/qr_koemoji_go.png" alt="KoeMoji-Go QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block; cursor: pointer;">
+                    </a>
+                </div>
+                <div style="text-align: center;">
+                    <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">YouTube文字コピー</p>
+                    <a href="https://chromewebstore.google.com/detail/youtubemojicopy/ejeafnfdgeipigfackgkhcgfbjiijbgf" target="_blank" rel="noopener noreferrer">
+                        <img src="images/qr_youtube_copy.png" alt="YouTube文字コピー QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block; cursor: pointer;">
+                    </a>
+                </div>
+                <div style="text-align: center;">
+                    <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">infohiroki.com</p>
+                    <a href="https://infohiroki.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/qr_personal_site.png" alt="個人サイト QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block; cursor: pointer;">
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- スライド2: 問いかけ -->
@@ -342,7 +360,9 @@
                     </div>
                 </div>
                 <div style="text-align: center; padding-top: 20px;">
-                    <img src="images/qr_personal_site.png" alt="個人サイト QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block;">
+                    <a href="https://infohiroki.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/qr_personal_site.png" alt="個人サイト QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block; cursor: pointer;">
+                    </a>
                     <p style="font-size: 1.3rem; margin-top: 15px; color: #666; font-weight: bold;">infohiroki.com</p>
                 </div>
             </div>
@@ -513,7 +533,7 @@
             </div>
         </div>
 
-        <!-- スライド14: 気づき -->
+        <!-- スライド12: 気づき -->
         <div class="slide">
             <h2 style="font-size: 3.5rem; color: #EC65A5;">気づき</h2>
             <div style="max-width: 80%;">
@@ -533,7 +553,41 @@
             </div>
         </div>
 
-        <!-- スライド15: なぜ作ったか -->
+        <!-- スライド13: KoeMoji-Goとは -->
+        <div class="slide">
+            <h2>KoeMoji-Go とは？</h2>
+            <p style="text-align: center; font-size: 1.6rem; margin-bottom: 30px; color: #666;">音声・動画ファイル自動文字起こしツール</p>
+            <div style="display: flex; justify-content: center; gap: 40px; align-items: start; width: 100%; max-width: 98%;">
+                <div style="flex: 1; max-width: 450px;">
+                    <h3 style="text-align: center;">主な機能</h3>
+                    <ul class="feature-list">
+                        <li>🎤 音声・動画の自動文字起こし</li>
+                        <li>🎙️ 録音機能（マイク / デュアル録音）</li>
+                        <li>🤖 AI要約（OpenAI API）</li>
+                        <li>🖥️ GUI & TUI 両対応</li>
+                        <li>🔒 完全ローカル処理</li>
+                    </ul>
+                </div>
+                <div style="text-align: center; padding-top: 40px; flex-shrink: 0;">
+                    <a href="https://hmtc.jp/it-solutions/products/koemoji/index.html" target="_blank" rel="noopener noreferrer">
+                        <img src="images/qr_koemoji_go.png" alt="KoeMoji-Go QRコード" style="width: 180px; height: 180px; margin: 0 auto; display: block; cursor: pointer;">
+                    </a>
+                    <p style="font-size: 1.3rem; margin-top: 10px; color: #666; font-weight: bold;">KoeMoji-Go<br>ウェブサイト</p>
+                </div>
+                <div style="flex: 1; max-width: 450px;">
+                    <h3 style="text-align: center;">実用例</h3>
+                    <ul class="feature-list">
+                        <li>📝 会議の議事録作成</li>
+                        <li>🏥 医療機関での記録</li>
+                        <li>⚖️ 法律事務所での相談記録</li>
+                        <li>🏗️ 建設業での打ち合わせ</li>
+                        <li>🎓 講義の文字起こし</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド14: なぜ作ったか -->
         <div class="slide">
             <h2>KoeMoji-Go：なぜ作ったか</h2>
             <div class="content-box" style="max-width: 80%;">
@@ -556,39 +610,7 @@
             </div>
         </div>
 
-        <!-- スライド16: KoeMoji-Goとは -->
-        <div class="slide">
-            <h2>KoeMoji-Go とは？</h2>
-            <p style="text-align: center; font-size: 1.6rem; margin-bottom: 30px; color: #666;">音声・動画ファイル自動文字起こしツール</p>
-            <div style="display: flex; justify-content: center; gap: 40px; align-items: start; width: 100%; max-width: 98%;">
-                <div style="flex: 1; max-width: 450px;">
-                    <h3 style="text-align: center;">主な機能</h3>
-                    <ul class="feature-list">
-                        <li>🎤 音声・動画の自動文字起こし</li>
-                        <li>🎙️ 録音機能（マイク / デュアル録音）</li>
-                        <li>🤖 AI要約（OpenAI API）</li>
-                        <li>🖥️ GUI & TUI 両対応</li>
-                        <li>🔒 完全ローカル処理</li>
-                    </ul>
-                </div>
-                <div style="text-align: center; padding-top: 40px; flex-shrink: 0;">
-                    <img src="images/qr_koemoji_go.png" alt="KoeMoji-Go QRコード" style="width: 180px; height: 180px; margin: 0 auto; display: block;">
-                    <p style="font-size: 1.3rem; margin-top: 10px; color: #666; font-weight: bold;">KoeMoji-Go<br>ウェブサイト</p>
-                </div>
-                <div style="flex: 1; max-width: 450px;">
-                    <h3 style="text-align: center;">実用例</h3>
-                    <ul class="feature-list">
-                        <li>📝 会議の議事録作成</li>
-                        <li>🏥 医療機関での記録</li>
-                        <li>⚖️ 法律事務所での相談記録</li>
-                        <li>🏗️ 建設業での打ち合わせ</li>
-                        <li>🎓 講義の文字起こし</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- スライド17: Phase 1 - Python版の挑戦 -->
+        <!-- スライド15: Phase 1 - Python版の挑戦 -->
         <div class="slide">
             <h2>Phase 1：Python版の挑戦</h2>
             <div class="content-box" style="max-width: 75%;">
@@ -607,7 +629,7 @@
             </div>
         </div>
 
-        <!-- スライド18: Phase 2 - Go言語への決断 -->
+        <!-- スライド16: Phase 2 - Go言語への決断 -->
         <div class="slide">
             <h2>Phase 2：Go言語への決断</h2>
             <div class="content-box" style="max-width: 80%;">
@@ -629,7 +651,7 @@
             </div>
         </div>
 
-        <!-- スライド19: Go版v1.0達成 -->
+        <!-- スライド17: Go版v1.0達成 -->
         <div class="slide">
             <h2>Go版v1.0達成</h2>
             <div class="content-box" style="max-width: 80%;">
@@ -650,7 +672,7 @@
             </div>
         </div>
 
-        <!-- スライド20: v1.6.0 - 録音機能追加 -->
+        <!-- スライド18: v1.6.0 - 録音機能追加 -->
         <div class="slide">
             <h2>v1.6.0：録音機能追加</h2>
             <div class="content-box" style="max-width: 80%;">
@@ -673,7 +695,7 @@
             </div>
         </div>
 
-        <!-- スライド21: v1.7.0/v1.8.0 - デュアル録音への挑戦 -->
+        <!-- スライド19: v1.7.0/v1.8.0 - デュアル録音への挑戦 -->
         <div class="slide">
             <h2>v1.7.0/v1.8.0：デュアル録音への挑戦</h2>
             <div class="content-box" style="max-width: 85%;">
@@ -707,7 +729,7 @@
             </div>
         </div>
 
-        <!-- スライド22: v1.0→v1.8.5の進化 -->
+        <!-- スライド20: v1.0→v1.8.5の進化 -->
         <div class="slide">
             <h2>v1.0 → v1.8.5 の進化</h2>
             <div class="content-box" style="max-width: 80%;">
@@ -728,7 +750,7 @@
             </div>
         </div>
 
-        <!-- スライド23: でもまだ序章 -->
+        <!-- スライド21: でもまだ序章 -->
         <div class="slide">
             <h2>でもまだ序章</h2>
             <div style="max-width: 80%;">
@@ -750,7 +772,7 @@
             </div>
         </div>
 
-        <!-- スライド24: なぜ作り続けるのか -->
+        <!-- スライド22: なぜ作り続けるのか -->
         <div class="slide">
             <h2>なぜ作り続けるのか？</h2>
             <div style="max-width: 80%;">
@@ -769,7 +791,7 @@
             </div>
         </div>
 
-        <!-- スライド25: 創作が人を救う -->
+        <!-- スライド23: 創作が人を救う -->
         <div class="slide">
             <h2>創作が人を救う</h2>
             <div style="max-width: 80%;">
@@ -788,7 +810,7 @@
             </div>
         </div>
 
-        <!-- スライド26: プロダクトアウトであれ -->
+        <!-- スライド24: プロダクトアウトであれ -->
         <div class="slide">
             <h2>プロダクトアウトであれ</h2>
             <div style="max-width: 80%;">
@@ -808,7 +830,7 @@
             </div>
         </div>
 
-        <!-- スライド27: AI時代は個人開発時代 -->
+        <!-- スライド25: AI時代は個人開発時代 -->
         <div class="slide">
             <h2>AI時代は個人開発時代</h2>
             <div style="max-width: 80%;">
@@ -828,7 +850,7 @@
             </div>
         </div>
 
-        <!-- スライド28: パラドックス -->
+        <!-- スライド26: パラドックス -->
         <div class="slide">
             <h2 style="font-size: 3.5rem; color: #EC65A5;">パラドックス</h2>
             <p style="font-size: 2.5rem; text-align: center; line-height: 2.5; margin-top: 80px;">
@@ -836,7 +858,7 @@
             </p>
         </div>
 
-        <!-- スライド29: まとめ - 3つの真実 -->
+        <!-- スライド27: まとめ - 3つの真実 -->
         <div class="slide">
             <h2>3つの真実</h2>
             <div class="content-box" style="max-width: 85%;">
@@ -859,32 +881,44 @@
             </div>
         </div>
 
-        <!-- スライド30: リンク -->
+        <!-- スライド28: タイトル（最初と同じ） -->
         <div class="slide">
-            <h1 style="font-size: 3.5rem; margin-bottom: 50px;">完成待ってたら死ぬ</h1>
-            <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; margin-bottom: 60px;">今出せ、v1.0で出せ</p>
+            <h1>完成待ってたら死ぬ</h1>
+            <p class="subtitle">〜今出せ、v1.0で出せ〜</p>
+            <p class="author">Hiroki Takamura</p>
+            <p class="event">AI勉強会 2025.11</p>
+        </div>
+
+        <!-- スライド29: ご清聴ありがとうございました -->
+        <div class="slide">
+            <h1 style="font-size: 4rem; color: #EC65A5; font-weight: bold; margin-bottom: 60px;">ご清聴ありがとうございました</h1>
             <div style="display: flex; justify-content: center; gap: 100px; margin: 40px 0;">
                 <div style="text-align: center;">
                     <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">KoeMoji-Go</p>
-                    <img src="images/qr_koemoji_go.png" alt="KoeMoji-Go QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block;">
+                    <a href="https://hmtc.jp/it-solutions/products/koemoji/index.html" target="_blank" rel="noopener noreferrer">
+                        <img src="images/qr_koemoji_go.png" alt="KoeMoji-Go QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block; cursor: pointer;">
+                    </a>
                 </div>
                 <div style="text-align: center;">
                     <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">YouTube文字コピー</p>
-                    <img src="images/qr_youtube_copy.png" alt="YouTube文字コピー QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block;">
+                    <a href="https://chromewebstore.google.com/detail/youtubemojicopy/ejeafnfdgeipigfackgkhcgfbjiijbgf" target="_blank" rel="noopener noreferrer">
+                        <img src="images/qr_youtube_copy.png" alt="YouTube文字コピー QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block; cursor: pointer;">
+                    </a>
                 </div>
                 <div style="text-align: center;">
                     <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">infohiroki.com</p>
-                    <img src="images/qr_personal_site.png" alt="個人サイト QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block;">
+                    <a href="https://infohiroki.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="images/qr_personal_site.png" alt="個人サイト QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block; cursor: pointer;">
+                    </a>
                 </div>
             </div>
-            <p style="font-size: 2.2rem; margin-top: 60px; color: #EC65A5; font-weight: bold;">ご清聴ありがとうございました</p>
         </div>
     </div>
 
     <img src="images/logo.svg" alt="Logo" class="logo">
 
     <div class="slide-number">
-        <span id="current-slide">1</span> / <span id="total-slides">28</span>
+        <span id="current-slide">1</span> / <span id="total-slides">29</span>
     </div>
 
     <div class="footer-url">infohiroki.com</div>
