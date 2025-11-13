@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>完成待ってたら死ぬ 〜今出せ、v1.0で出せ〜</title>
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
     <style>
         * {
             margin: 0;
@@ -145,32 +146,6 @@
             box-shadow: 0 3px 10px rgba(236, 101, 165, 0.3);
         }
 
-        .controls {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-
-        .controls button {
-            background: linear-gradient(135deg, #EC65A5 0%, #d5508d 100%);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1.3rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 3px 10px rgba(236, 101, 165, 0.3);
-        }
-
-        .controls button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(236, 101, 165, 0.4);
-        }
-
         .slide-number {
             position: fixed;
             bottom: 30px;
@@ -182,6 +157,25 @@
             padding: 8px 15px;
             border-radius: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            z-index: 1000;
+            opacity: 0.8;
+        }
+
+        .footer-url {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.1rem;
+            color: #999;
+            z-index: 1000;
         }
 
         .highlight {
@@ -246,12 +240,12 @@
 
         .three-photos .photo-item {
             flex: 1;
-            max-width: 250px;
+            max-width: 200px;
         }
 
         .three-photos img {
-            width: 100%;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.15);
@@ -325,7 +319,7 @@
             <h3 style="text-align: center; margin-bottom: 20px; font-size: 2rem;">Hiroki Takamura</h3>
             <div class="content-box" style="width: 100%; max-width: 90%; text-align: left; padding: 25px 35px;">
                 <p style="font-size: 1.4rem; line-height: 1.8;">
-                    ダンス 20年（ストリート→コンテンポラリー、自主公演、東京ドーム出演）/ ヨガ講師 10年以上（シヴァナンダヨガDVD監修）/ IT 30年 / 小説（一次選考通過）/ ロープアクセス / 飲食業（ゴールデン街バーテンダー）/ <strong style="color: #EC65A5;">現在：フリーランスエンジニア＋個人開発</strong>
+                    ダンス 20年（ストリート→コンテンポラリー、講師、振付師、自主公演、東京ドーム出演）/ ヨガ講師 10年以上（シヴァナンダヨガDVD監修）/ IT 30年（10歳でインターネットと出会う、データベース会社、Webディレクター、飲食店IT責任者、PCサポートセンター）/ 小説（一次選考通過）/ ロープアクセス / 飲食業（多国籍料理屋、六本木ヒルズ イタリアン、ゴールデン街バーテンダー）/ メッセンジャー / なんでも屋 / シーリング工事 / 外壁改修 / 外壁点検・調査 / 防水 / <strong style="color: #EC65A5;">現在：フリーランスエンジニア＋個人開発</strong>
                 </p>
             </div>
             <div style="display: flex; justify-content: center; align-items: start; gap: 30px; margin-top: 30px;">
@@ -337,6 +331,10 @@
                     <div class="photo-item">
                         <img src="images/dance_performance.jpg" alt="ダンス公演">
                         <p style="color: #EC65A5;">ダンス公演</p>
+                    </div>
+                    <div class="photo-item">
+                        <img src="images/rope_access_2.jpg" alt="ロープアクセス">
+                        <p style="color: #EC65A5;">ロープアクセス</p>
                     </div>
                     <div class="photo-item">
                         <img src="images/bartender.jpg" alt="バーテンダー">
@@ -510,7 +508,7 @@
                 </p>
                 <div class="arrow">↓</div>
                 <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2; margin: 25px 0;">
-                    「v1.0をどこにするか<br>決められない」こと
+                    「v1.0をどこにするか決められない」こと
                 </p>
             </div>
         </div>
@@ -553,8 +551,7 @@
                 </p>
                 <div class="arrow">↓</div>
                 <p style="font-size: 2rem; color: #EC65A5; font-weight: bold; text-align: center;">
-                    ローカルで、簡単に、誰でも使える<br>
-                    ツールを作ろう
+                    ローカルで、簡単に、誰でも使えるツールを作ろう
                 </p>
             </div>
         </div>
@@ -563,8 +560,8 @@
         <div class="slide">
             <h2>KoeMoji-Go とは？</h2>
             <p style="text-align: center; font-size: 1.6rem; margin-bottom: 30px; color: #666;">音声・動画ファイル自動文字起こしツール</p>
-            <div style="display: flex; justify-content: center; gap: 40px; align-items: start;">
-                <div style="flex: 1; max-width: 300px;">
+            <div style="display: flex; justify-content: center; gap: 40px; align-items: start; width: 100%; max-width: 98%;">
+                <div style="flex: 1; max-width: 450px;">
                     <h3 style="text-align: center;">主な機能</h3>
                     <ul class="feature-list">
                         <li>🎤 音声・動画の自動文字起こし</li>
@@ -574,11 +571,11 @@
                         <li>🔒 完全ローカル処理</li>
                     </ul>
                 </div>
-                <div style="text-align: center; padding-top: 40px;">
+                <div style="text-align: center; padding-top: 40px; flex-shrink: 0;">
                     <img src="images/qr_koemoji_go.png" alt="KoeMoji-Go QRコード" style="width: 180px; height: 180px; margin: 0 auto; display: block;">
                     <p style="font-size: 1.3rem; margin-top: 10px; color: #666; font-weight: bold;">KoeMoji-Go<br>ウェブサイト</p>
                 </div>
-                <div style="flex: 1; max-width: 300px;">
+                <div style="flex: 1; max-width: 450px;">
                     <h3 style="text-align: center;">実用例</h3>
                     <ul class="feature-list">
                         <li>📝 会議の議事録作成</li>
@@ -762,7 +759,7 @@
                 </p>
                 <div class="arrow">↓</div>
                 <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2.2; margin: 30px 0;">
-                    創作こそが人間の本質
+                    創作こそが人間に残されたもの
                 </p>
                 <div class="arrow">↓</div>
                 <p style="font-size: 1.9rem; text-align: center; line-height: 2; margin: 30px 0; color: #666;">
@@ -777,8 +774,7 @@
             <h2>創作が人を救う</h2>
             <div style="max-width: 80%;">
                 <p style="font-size: 2.2rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2.2; margin: 30px 0;">
-                    創作し続けることが<br>
-                    人を救う唯一の方法
+                    創作し続けることが人を救う唯一の方法かもしれない
                 </p>
                 <div class="arrow">↓</div>
                 <p style="font-size: 1.9rem; text-align: center; line-height: 2.2; margin: 30px 0;">
@@ -812,21 +808,22 @@
             </div>
         </div>
 
-        <!-- スライド27: これはKoeMoji-Goだけの話じゃない -->
+        <!-- スライド27: AI時代は個人開発時代 -->
         <div class="slide">
-            <h2>これはKoeMoji-Goだけの話じゃない</h2>
+            <h2>AI時代は個人開発時代</h2>
             <div style="max-width: 80%;">
-                <p style="font-size: 2.2rem; text-align: center; line-height: 2.5; margin: 30px 0;">
-                    ダンス公演も<br>
-                    あなたが作るものも
+                <p style="font-size: 2.2rem; text-align: center; line-height: 2.2; margin: 30px 0;">
+                    一人で作れる量が激増した
                 </p>
                 <div class="arrow">↓</div>
-                <p style="font-size: 2rem; text-align: center; line-height: 2; margin: 30px 0; color: #666;">
-                    全て同じ
+                <p style="font-size: 2rem; text-align: center; line-height: 2.2; margin: 30px 0; color: #666;">
+                    マーケットインは予算・依頼がある時<br>
+                    個人開発はプロダクトアウトでいい
                 </p>
                 <div class="arrow">↓</div>
-                <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2;">
-                    v1.0を決めて、出せ
+                <p style="font-size: 2.3rem; color: #EC65A5; font-weight: bold; text-align: center; line-height: 2.2; margin: 30px 0;">
+                    マーケットインで足踏みするより<br>
+                    プロダクトアウトで今出せ
                 </p>
             </div>
         </div>
@@ -846,7 +843,7 @@
                 <div style="margin: 30px 0;">
                     <p style="font-size: 2rem; line-height: 2.5; margin: 25px 0; text-align: center;">
                         <strong style="color: #EC65A5; font-size: 2.2rem;">1. 創作し続けること</strong><br>
-                        <span style="font-size: 1.7rem; color: #666;">それが人を救う</span>
+                        <span style="font-size: 1.7rem; color: #666;">それが人を救うかも</span>
                     </p>
                     <div class="arrow">↓</div>
                     <p style="font-size: 2rem; line-height: 2.5; margin: 25px 0; text-align: center;">
@@ -866,35 +863,31 @@
         <div class="slide">
             <h1 style="font-size: 3.5rem; margin-bottom: 50px;">完成待ってたら死ぬ</h1>
             <p style="font-size: 2.5rem; color: #EC65A5; font-weight: bold; margin-bottom: 60px;">今出せ、v1.0で出せ</p>
-            <div style="display: flex; justify-content: center; gap: 60px; margin: 40px 0;">
+            <div style="display: flex; justify-content: center; gap: 100px; margin: 40px 0;">
                 <div style="text-align: center;">
-                    <p style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold;">KoeMoji-Go</p>
-                    <img src="images/qr_koemoji_go.png" alt="KoeMoji-Go QRコード" style="width: 180px; height: 180px; margin: 0 auto; display: block;">
-                    <p style="font-size: 1.3rem; margin-top: 10px; color: #666; font-weight: bold;">ウェブサイト</p>
+                    <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">KoeMoji-Go</p>
+                    <img src="images/qr_koemoji_go.png" alt="KoeMoji-Go QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block;">
                 </div>
                 <div style="text-align: center;">
-                    <p style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold;">Chrome拡張</p>
-                    <img src="images/qr_youtube_copy.png" alt="YouTube文字コピー QRコード" style="width: 180px; height: 180px; margin: 0 auto; display: block;">
-                    <p style="font-size: 1.3rem; margin-top: 10px; color: #666; font-weight: bold;">YouTube文字コピー</p>
+                    <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">YouTube文字コピー</p>
+                    <img src="images/qr_youtube_copy.png" alt="YouTube文字コピー QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block;">
                 </div>
                 <div style="text-align: center;">
-                    <p style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold;">個人サイト</p>
-                    <img src="images/qr_personal_site.png" alt="個人サイト QRコード" style="width: 180px; height: 180px; margin: 0 auto; display: block;">
-                    <p style="font-size: 1.3rem; margin-top: 10px; color: #666; font-weight: bold;">infohiroki.com</p>
+                    <p style="font-size: 1.8rem; margin-bottom: 20px; font-weight: bold;">infohiroki.com</p>
+                    <img src="images/qr_personal_site.png" alt="個人サイト QRコード" style="width: 200px; height: 200px; margin: 0 auto; display: block;">
                 </div>
             </div>
             <p style="font-size: 2.2rem; margin-top: 60px; color: #EC65A5; font-weight: bold;">ご清聴ありがとうございました</p>
         </div>
     </div>
 
+    <img src="images/logo.svg" alt="Logo" class="logo">
+
     <div class="slide-number">
         <span id="current-slide">1</span> / <span id="total-slides">28</span>
     </div>
 
-    <div class="controls">
-        <button id="prev-btn">← 前へ</button>
-        <button id="next-btn">次へ →</button>
-    </div>
+    <div class="footer-url">infohiroki.com</div>
 
     <script>
         let currentSlide = 0;
@@ -909,14 +902,6 @@
             slides[currentSlide].classList.add('active');
             document.getElementById('current-slide').textContent = currentSlide + 1;
         }
-
-        document.getElementById('prev-btn').addEventListener('click', () => {
-            showSlide(currentSlide - 1);
-        });
-
-        document.getElementById('next-btn').addEventListener('click', () => {
-            showSlide(currentSlide + 1);
-        });
 
         // キーボード操作
         document.addEventListener('keydown', (e) => {
